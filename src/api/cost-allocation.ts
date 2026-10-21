@@ -6,23 +6,23 @@ export interface AuthContext {
   accountId: string;
 }
 
-export interface MoveCostsRequest {
+export interface AllocationRequestBody {
   accountId: string;
   targetTeam: string;
   reason: string;
 }
 
-export interface MoveCostsSummary {
+export interface AllocationSummary {
   movedRowIds: string[];
   totalMovedUSD: number;
   targetTeam: string;
 }
 
 /** Assigns every untagged cost in an account to one team. */
-export async function moveCostsToTeam(
+export async function allocateUntaggedCosts(
   auth: AuthContext,
-  req: MoveCostsRequest,
-): Promise<MoveCostsSummary> {
+  req: AllocationRequestBody,
+): Promise<AllocationSummary> {
   const rows = await db.findUntaggedCosts(req.accountId);
 
   const movedRowIds: string[] = [];

@@ -1,10 +1,10 @@
 /** Scratch runner — `npm run allocate`. Edit freely. */
-import { db, seedRows, type CostRow } from './db/mock-db.ts';
+import { db, seedRows, type CostRow } from '../src/db/mock-db.ts';
 import {
-  moveCostsToTeam,
+  allocateUntaggedCosts,
   type AuthContext,
-  type MoveCostsRequest,
-} from './api/cost-allocation.ts';
+  type AllocationRequestBody,
+} from '../src/api/cost-allocation.ts';
 
 /** console.table, keyed by row id instead of an array index. */
 const table = (rows: CostRow[]) =>
@@ -12,7 +12,7 @@ const table = (rows: CostRow[]) =>
 
 const auth: AuthContext = { userId: 'user-17', accountId: 'Wiz' };
 
-const request: MoveCostsRequest = {
+const request: AllocationRequestBody = {
   accountId: 'Wiz',
   targetTeam: 'team-x',
   reason: 'Q3 shared infra split',
@@ -32,7 +32,7 @@ table(await db.findUntaggedCosts(request.accountId));
 const callsBefore = db.callCount;
 const startedAt = Date.now();
 
-const summary = await moveCostsToTeam(auth, request);
+const summary = await allocateUntaggedCosts(auth, request);
 
 console.log('--- returned ---');
 console.log(summary);

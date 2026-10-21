@@ -2,7 +2,7 @@
 import { describe, expect, it, beforeEach } from 'vitest';
 
 import { MockDb, seedRows } from '../src/db/mock-db.ts';
-import { moveCostsToTeam } from '../src/api/cost-allocation.ts';
+import { allocateUntaggedCosts } from '../src/api/cost-allocation.ts';
 
 describe('mock repository', () => {
   let db: MockDb;
@@ -57,7 +57,7 @@ describe('the endpoint under review', () => {
     db.latencyMs = 0;
     db.reset(seedRows());
 
-    const summary = await moveCostsToTeam(
+    const summary = await allocateUntaggedCosts(
       { userId: 'user-1', accountId: 'Wiz' },
       { accountId: 'Wiz', targetTeam: 'team-x', reason: 'smoke test' },
     );

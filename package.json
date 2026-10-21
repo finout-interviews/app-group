@@ -8,7 +8,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
-    "allocate": "node src/run-allocation.ts"
+    "allocate": "node scripts/run-allocation.ts",
+    "show-db": "node scripts/show-db.ts"
   },
   "devDependencies": {
     "@types/node": "24.10.1",
