@@ -23,12 +23,12 @@ Feel free to put it in a new file.
 Run it with these two rules on `Wiz`'s rows — they are the `seedRows()` at the bottom of `src/db/mock-db.ts`.\
 Reminder - `npm run show-db` prints them.
 
-For example, the `prod` rule alone on `Wiz`'s rows gives:
+For example, running the rules above on `Wiz`'s rows gives:
 
 ```
-team-x     1200   60% of prod's 2000
-team-y      800   40% of prod's 2000
-untagged    840   staging 750 + data 90 — no rule covers them
+team-x     1650
+team-y      800
+untagged    390
 ```
 
 Yours to decide: the rule and result schema.\
