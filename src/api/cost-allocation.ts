@@ -13,8 +13,8 @@ export interface AllocationRequestBody {
 }
 
 export interface AllocationSummary {
-  movedRowIds: string[];
-  totalMovedUSD: number;
+  assignedRowIds: string[];
+  totalAssignedUSD: number;
   targetTeam: string;
 }
 
@@ -25,23 +25,23 @@ export async function allocateUntaggedCosts(
 ): Promise<AllocationSummary> {
   const rows = await db.findUntaggedCosts(req.accountId);
 
-  const movedRowIds: string[] = [];
-  let totalMovedUSD = 0;
+  const assignedRowIds: string[] = [];
+  let totalAssignedUSD = 0;
 
   for (const row of rows) {
     await db.assignCostToTeam(row.id, req.targetTeam);
-    movedRowIds.push(row.id);
-    totalMovedUSD += row.cost;
+    assignedRowIds.push(row.id);
+    totalAssignedUSD += row.cost;
   }
 
   await db.insertAuditEntry({
     accountId: auth.accountId,
     actorId: auth.userId,
     targetTeam: req.targetTeam,
-    movedRows: movedRowIds.length,
-    totalUSD: totalMovedUSD,
+    assignedRows: assignedRowIds.length,
+    totalUSD: totalAssignedUSD,
     reason: req.reason,
   });
 
-  return { movedRowIds, totalMovedUSD, targetTeam: req.targetTeam };
+  return { assignedRowIds, totalAssignedUSD, targetTeam: req.targetTeam };
 }

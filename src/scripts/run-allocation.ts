@@ -1,10 +1,10 @@
 /** Scratch runner — `npm run allocate`. Edit freely. */
-import { db, seedRows, type CostRow } from '../src/db/mock-db.ts';
+import { db, seedRows, type CostRow } from '../db/mock-db.ts';
 import {
   allocateUntaggedCosts,
   type AuthContext,
   type AllocationRequestBody,
-} from '../src/api/cost-allocation.ts';
+} from '../api/cost-allocation.ts';
 
 /** console.table, keyed by row id instead of an array index. */
 const table = (rows: CostRow[]) =>

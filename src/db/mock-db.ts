@@ -24,7 +24,7 @@ export interface AuditEntry {
   accountId: string;
   actorId: string;
   targetTeam: string;
-  movedRows: number;
+  assignedRows: number;
   totalUSD: number;
   reason: string;
 }

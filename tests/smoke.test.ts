@@ -64,8 +64,8 @@ describe('the endpoint under review', () => {
 
     expect(summary).toMatchObject({
       targetTeam: 'team-x',
-      movedRowIds: expect.any(Array),
-      totalMovedUSD: expect.any(Number),
+      assignedRowIds: expect.any(Array),
+      totalAssignedUSD: expect.any(Number),
     });
   });
 });
